@@ -75,8 +75,12 @@ WSGI_APPLICATION = 'bank_project.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'bank_management_system',
+        'USER': 'root',
+        'PASSWORD': 'Pragati@0499',
+        'HOST': 'localhost',
+        'PORT': '3306'
     }
 }
 
@@ -118,5 +122,5 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS =[
-    BASE_DIR/"static"
+    BASE_DIR/"static",
 ]
