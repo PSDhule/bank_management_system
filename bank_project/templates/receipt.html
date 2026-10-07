@@ -1,0 +1,182 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="receipt-page">
+
+    <div class="receipt-card">
+
+        <!-- HEADER -->
+        <div class="receipt-header">
+
+            <div class="receipt-logo">
+                <i class="fa-solid fa-building-columns"></i>
+            </div>
+
+            <div>
+                <h1>SecureBank</h1>
+                <p>Smart Banking For You</p>
+            </div>
+
+        </div>
+
+
+        <!-- TITLE -->
+        <div class="receipt-title">
+
+            <div>
+                <h2>Transaction Receipt</h2>
+                <p>Official transaction confirmation</p>
+            </div>
+
+            <span class="success-badge">
+                <i class="fa-solid fa-circle-check"></i>
+                {{ transaction.type }}
+            </span>
+
+        </div>
+
+
+        <!-- AMOUNT -->
+        <div class="receipt-amount">
+
+            <span>Transaction Amount</span>
+
+            <h1>₹{{ transaction.amount }}</h1>
+
+            <p>
+                <i class="fa-solid fa-circle-check"></i>
+                Transaction Completed
+            </p>
+
+        </div>
+
+
+        <!-- TRANSACTION DETAILS -->
+        <div class="receipt-section">
+
+            <h3>
+                <i class="fa-solid fa-receipt"></i>
+                Transaction Details
+            </h3>
+
+            <div class="receipt-details">
+
+                <div class="detail-row">
+                    <span>Reference Number</span>
+                    <strong>{{ transaction.reference }}</strong>
+                </div>
+
+                <div class="detail-row">
+                    <span>Transaction Type</span>
+                    <strong>{{ transaction.type }}</strong>
+                </div>
+
+                <div class="detail-row">
+                    <span>Date &amp; Time</span>
+                    <strong>
+                        {{ transaction.date|date:"d M Y, h:i A" }}
+                    </strong>
+                </div>
+
+                <div class="detail-row">
+                    <span>Status</span>
+
+                    <strong class="status-success">
+                        Completed
+                    </strong>
+                </div>
+
+                {% if transaction.recipient %}
+
+                <div class="detail-row">
+                    <span>Recipient</span>
+                    <strong>{{ transaction.recipient }}</strong>
+                </div>
+
+                {% endif %}
+
+            </div>
+        </div>
+
+
+        <!-- CUSTOMER DETAILS -->
+        <div class="receipt-section">
+
+            <h3>
+                <i class="fa-solid fa-user"></i>
+                Customer Details
+            </h3>
+
+            <div class="receipt-details">
+
+                <div class="detail-row">
+                    <span>Customer Name</span>
+                    <strong>{{ user.name }}</strong>
+                </div>
+
+                <div class="detail-row">
+                    <span>Email</span>
+                    <strong>{{ user.email }}</strong>
+                </div>
+
+                <div class="detail-row">
+                    <span>Account Number</span>
+                    <strong>{{ account_number }}</strong>
+                </div>
+
+                <div class="detail-row">
+                    <span>IFSC Code</span>
+                    <strong>{{ ifsc_code }}</strong>
+                </div>
+
+                <div class="detail-row">
+                    <span>Available Balance</span>
+                    <strong>₹{{ user.balance }}</strong>
+                </div>
+
+            </div>
+        </div>
+
+
+        <!-- FOOTER -->
+        <div class="receipt-footer">
+
+            <div class="footer-icon">
+                <i class="fa-solid fa-shield-halved"></i>
+            </div>
+
+            <div>
+                <p>
+                    This is a computer-generated transaction receipt.
+                </p>
+
+                <p>
+                    Thank you for banking with
+                    <strong>SecureBank</strong>.
+                </p>
+            </div>
+
+        </div>
+
+
+        <!-- ACTIONS -->
+        <div class="receipt-actions">
+
+            <button onclick="window.print()" class="print-btn">
+                <i class="fa-solid fa-print"></i>
+                Print Receipt
+            </button>
+
+            <a href="{% url 'transactions' %}" class="back-btn">
+                <i class="fa-solid fa-arrow-left"></i>
+                Back to Transactions
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

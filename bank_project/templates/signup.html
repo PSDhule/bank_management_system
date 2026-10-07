@@ -1,0 +1,135 @@
+{% load static %} 
+
+<!DOCTYPE html> 
+
+<html lang="en"> 
+    
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Create Account | BM Bank</title>
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head> 
+    
+<body>
+
+<div class="auth-page"> 
+    <div class="auth-card"> 
+        <div class="auth-logo"> 
+            <i class="fa-solid fa-user-plus"></i> 
+        </div> 
+        
+        <h1>BM Bank</h1> 
+        
+        <h2>Create Account</h2> 
+        
+        <p class="auth-subtitle"> 
+            Open your smart banking account 
+        </p> 
+        
+        {% if messages %} 
+        
+        {% for message in messages %} 
+        
+        <div class="{% if message.tags == 'success' %}success-message {% else %} error-message {% endif %}"> 
+            {{ message }} 
+        </div> 
+        
+        {% endfor %} 
+        
+        {% endif %} 
+        
+        {% if error %} 
+        
+        <div class="error-message"> 
+            {{ error }} 
+        </div> 
+        
+        {% endif %} 
+        
+        <form method="POST"> 
+            {% csrf_token %} 
+            <div class="form-group"> 
+                <label for="name"> 
+                    Full Name 
+                </label> 
+                
+                <input 
+                    type="text" 
+                    id="name" 
+                    name="name" 
+                    placeholder="Enter your full name" required 
+                > 
+            </div> 
+            
+            <div class="form-group"> 
+                <label for="email"> 
+                    Email Address 
+                </label> 
+                
+                <input 
+                    type="email" 
+                    id="email" 
+                    name="email" 
+                    placeholder="Enter your email" required 
+                > 
+            
+            </div> 
+             <div class="form-group"> 
+                
+                <label for="password"> 
+                    Password 
+                </label> 
+                
+                <input 
+                    type="password" 
+                    id="password" 
+                    name="password" 
+                    placeholder="Minimum 6 characters" minlength="6" required 
+                > 
+            </div> 
+            
+            <div class="form-group"> 
+                <label for="confirm_password"> 
+                    Confirm Password 
+                </label> 
+                
+                <input 
+                    type="password" 
+                    id="confirm_password" 
+                    name="confirm_password" 
+                    placeholder="Confirm your password" minlength="6" 
+                    required 
+                > 
+            
+            </div> 
+            
+            <button type="submit" class="auth-btn"> 
+                <i class="fa-solid fa-user-plus"></i> 
+                    Create Account 
+                </button> 
+            </form> 
+            
+            <p class="auth-bottom-text"> 
+                Already have an account? 
+            </p> 
+            
+            <a href="{% url 'login' %}" class="auth-link"> 
+                Login Here 
+            </a> 
+            
+            <a href="{% url 'home' %}" class="back-home"> 
+                <i class="fa-solid fa-arrow-left"></i> 
+                Back to Home 
+            </a> 
+        </div> 
+    </div> 
+</body> 
+
+</html>

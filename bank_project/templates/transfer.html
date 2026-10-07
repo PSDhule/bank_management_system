@@ -1,0 +1,84 @@
+{% extends 'base.html' %} 
+{% block content %}
+
+<div class="bank-operation-page">
+  <nav class="operation-navbar">
+    <div class="operation-logo">
+      <i class="fa-solid fa-building-columns"></i>
+
+      SecureBank
+    </div>
+
+  </nav>
+
+  <div class="operation-content">
+    <div class="operation-card">
+      <div class="operation-icon">
+        <i class="fa-solid fa-arrow-right-arrow-left"></i>
+      </div>
+
+      <p class="operation-label">MONEY TRANSFER</p>
+
+      <h1>Transfer Money</h1>
+
+      <p class="operation-description">
+        Transfer money securely to another SecureBank customer.
+      </p>
+
+      {% if error %}
+
+      <p class="operation-error">
+        <i class="fa-solid fa-circle-exclamation"></i>
+
+        {{ error }}
+      </p>
+
+      {% endif %}
+
+      <form method="POST">
+        {% csrf_token %}
+
+        <label> Receiver Email </label>
+
+        <div class="amount-input">
+          <i class="fa-solid fa-envelope"></i>
+
+          <input
+            type="email"
+            name="receiver_email"
+            placeholder="Enter receiver email"
+            required
+          />
+        </div>
+
+        <label> Transfer Amount </label>
+
+        <div class="amount-input">
+          <span>₹</span>
+
+          <input
+            type="number"
+            name="amount"
+            placeholder="Enter amount"
+            min="1"
+            required
+          />
+        </div>
+
+        <button type="submit" class="operation-btn">
+          Transfer Money
+
+          <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </form>
+
+      <a href="{% url 'dashboard' %}" class="operation-back">
+        <i class="fa-solid fa-arrow-left"></i>
+
+        Back to Dashboard
+      </a>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

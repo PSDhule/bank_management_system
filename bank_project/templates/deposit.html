@@ -1,0 +1,68 @@
+{% extends 'base.html' %} 
+{% block content %}
+
+<div class="bank-operation-page">
+  <nav class="operation-navbar">
+    <div class="operation-logo">
+      <i class="fa-solid fa-building-columns"></i>
+      SecureBank
+    </div>
+  </nav>
+
+  <div class="operation-content">
+    <div class="operation-card">
+      <div class="operation-icon deposit-icon">
+        <i class="fa-solid fa-wallet"></i>
+      </div>
+
+      <p class="operation-label">ACCOUNT MANAGEMENT</p>
+
+      <h1>Deposit Money</h1>
+
+      <p class="operation-description">
+        Add money to your bank account securely.
+      </p>
+
+      {% if error %}
+
+      <p class="operation-error">
+        <i class="fa-solid fa-circle-exclamation"></i>
+        {{ error }}
+      </p>
+
+      {% endif %}
+
+      <form method="POST">
+        {% csrf_token %}
+
+        <label> Enter Amount </label>
+
+        <div class="amount-input">
+          <span>₹</span>
+
+          <input
+            type="number"
+            name="amount"
+            placeholder="Enter amount"
+            min="1"
+            required
+          />
+        </div>
+
+        <button type="submit" class="operation-btn">
+          Deposit Money
+
+          <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </form>
+
+      <a href="{% url 'dashboard' %}" class="operation-back">
+        <i class="fa-solid fa-arrow-left"></i>
+
+        Back to Dashboard
+      </a>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,109 @@
+{% load static %} 
+<!DOCTYPE html> 
+
+<html lang="en"> 
+
+<head> 
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    
+    <title>Login | BM Bank</title> 
+    
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"> 
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"> 
+
+</head> 
+
+<body> 
+    
+<div class="auth-page"> 
+    <div class="auth-card"> 
+        <div class="auth-logo"> 
+            <i class="fa-solid fa-building-columns"></i> 
+        </div> 
+        
+        <h1>BM Bank</h1> 
+        
+        <h2>Welcome Back</h2> 
+        
+        <p class="auth-subtitle"> 
+            Login to access your banking account 
+        </p> 
+        
+        {% if error %} 
+        
+        <div class="error-message"> 
+            {{ error }} 
+        </div> 
+        
+        {% endif %} 
+        
+        {% if messages %} 
+        
+        {% for message in messages %} 
+        
+        <div class="{% if message.tags == 'success' %}success-message{% else %}error-message{% endif %}"> 
+            
+            {{ message }} 
+        </div> 
+        
+        {% endfor %} 
+        
+        {% endif %} 
+        
+        <form method="POST"> 
+            
+            {% csrf_token %} 
+            
+            <div class="form-group"> 
+                <label for="email"> 
+                    Email Address 
+                </label> 
+                
+                <input 
+                    type="email" 
+                    id="email" 
+                    name="email" 
+                    placeholder="Enter your email" required 
+                > 
+            </div> 
+            
+            <div class="form-group"> 
+                <label for="password"> 
+                    Password 
+                </label> 
+                
+                <input 
+                    type="password" 
+                    id="password" 
+                    name="password" placeholder="Enter your password" 
+                    required 
+                > 
+            </div> 
+            
+            <button type="submit" class="auth-btn"> 
+                <i class="fa-solid fa-right-to-bracket">
+                </i> 
+                Login 
+            </button> 
+        </form> 
+        
+        <p class="auth-bottom-text"> 
+            Don't have an account? 
+        </p> 
+        
+        <a href="{% url 'signup' %}" class="auth-link"> 
+            Create New Account 
+        </a> 
+        
+        <a href="{% url 'home' %}" class="back-home"> 
+            <i class="fa-solid fa-arrow-left"></i>   
+            Back to Home 
+        </a> 
+    </div> 
+</div> 
+
+</body> 
+
+</html>

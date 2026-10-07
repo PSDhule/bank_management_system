@@ -1,0 +1,158 @@
+{% extends 'base.html' %}
+{% block content %}
+
+  <div class="customers-page">
+    <!-- NAVBAR -->
+    <nav class="customers-navbar">
+      <div class="customers-logo">
+        <i class="fa-solid fa-building-columns"></i> <span>SecureBank</span>
+      </div>
+
+      <div class="customers-nav-links">
+        <a href="{% url 'dashboard' %}"><i class="fa-solid fa-house"></i> Dashboard</a>
+
+        <a href="{% url 'profile' %}">
+          <i class="fa-solid fa-user"></i>
+          Profile
+        </a>
+
+        <a href="{% url 'customers' %}" class="active">
+            <i class="fa-solid fa-users"></i> 
+            Customers
+        </a>
+
+        <a href="{% url 'transactions' %}">
+            <i class="fa-soli fa-clock-rotate-left"></i> 
+            Transactions
+        </a> 
+        
+        <a href="{% url 'logout' %}" class="customers-logout">
+            <i class="fa-solid fa-right-from-bracket"></i> 
+            Logout
+        </a>
+      </div>
+    </nav> 
+    
+    <!-- HEADER --> 
+    <section class="customers-header">
+        <div>
+            <p class="customers-label">SECUREBANK DIRECTORY</p> 
+            <h1>All Customers</h1> 
+            <p>View and manage registered SecureBank customers.</p>
+        </div> 
+      
+        <a href="{% url 'dashboard' %}" class="customers-back-btn">
+            <i class="fa-solid fa-arrow-left"></i> 
+            Dashboard
+        </a>
+    </section> 
+    
+    <!-- STATISTICS --> 
+    <section class="customers-stats">
+        <div class="customer-stat-card">
+          <div class="customer-stat-icon">
+            <i class="fa-solid fa-users"></i>
+          </div> 
+
+          <div>
+            <span>Total Customers</span> 
+            <h2>{{ customers|length }}</h2>
+          </div>
+        </div> 
+        
+        <div class="customer-stat-card">
+          <div class="customer-stat-icon active-stat">
+            <i class="fa-solid fa-user-check"></i>
+          </div> 
+          <div>
+            <span>Customer Directory</span> 
+            <h2>Secure</h2>
+          </div>
+        </div> 
+        
+        <div class="customer-stat-card">
+          <div class="customer-stat-icon account-stat">
+            <i class="fa-solid
+            fa-building-columns"></i>
+          </div> 
+          
+          <div>
+            <span>Banking Platform</span> 
+            <h2>SecureBank</h2>
+          </div>
+        </div>
+    </section> 
+    
+    <!-- CUSTOMER LIST --> 
+    <section class="customers-section">
+      <div class="customers-section-heading">
+        <div>
+          <p>REGISTERED USERS</p> 
+          <h2>Customer Directory</h2>
+        </div> 
+        
+        <div class="customer-count">
+          {{ customers|length }} Customers
+        </div>
+      </div> 
+      
+      <div class="customers-grid">
+        {% for customer in customers %}
+          <div class="customer-card">
+            <!-- CARD TOP --> 
+            <div class="customer-card-top">
+              <div class="customer-avatar">
+                <i class="fa-solid fa-user"></i>
+              </div> 
+              
+              <span class="customer-status">
+                <i class="fa-solid fa-circle"></i> {{ customer.account_status }}
+              </span>
+            </div> 
+            
+            <!-- CUSTOMER INFO --> 
+            <div class="customer-main-info">
+              <h3>{{ customer.name }}</h3> 
+              <p>
+                <i class="fa-solid fa-envelope"></i> 
+                {{ customer.email }}
+              </p>
+            </div> 
+            
+            <!-- BASIC DETAILS --> 
+            <div class="customer-mini-details">
+              <div>
+                <span>Account Number</span> <strong>
+                  {{ customer.account_number }}</strong>
+              </div> 
+              <div>
+                <span>Balance</span> 
+                <strong>
+                  ₹{{ customer.balance }}
+                </strong>
+              </div>
+            </div> 
+            
+            <!-- VIEW BUTTON --> 
+            <a href="{% url 'customer_detail' customer.id %}" class="customer-view-btn">
+              View Full Profile 
+              <i class="fa-solid fa-arrow-right"></i>
+            </a>
+          </div>
+          {% empty %}
+            <div class="customers-empty">
+              <i class="fa-solid fa-users-slash"></i> 
+              <h3>No Customers Found</h3> 
+              <p>There are currently no registered customers.
+              </p>
+            </div>
+          {% endfor %}
+        </div>
+    </section> 
+    
+    <!-- FOOTER --> 
+    <footer class="simple-footer">
+      SecureBank © 2026 | Smart Banking For You.
+    </footer>
+  </div>
+{% endblock %}

@@ -1,0 +1,172 @@
+{% extends 'base.html' %} 
+{% block content %}
+
+<div class="transactions-page">
+  <nav class="operation-navbar">
+    <div class="operation-logo">
+      <i class="fa-solid fa-building-columns"></i>
+
+      SecureBank
+    </div>
+  </nav>
+
+  <section class="transactions-content">
+    <div class="transactions-heading">
+      <div>
+        <p>ACCOUNT ACTIVITY</p>
+
+        <h1>Transaction History</h1>
+
+        <span> Track your deposits, withdrawals and transfers </span>
+      </div>
+
+      <a href="{% url 'dashboard' %}" class="transaction-back">
+        <i class="fa-solid fa-arrow-left"></i>
+
+        Dashboard
+      </a>
+    </div>
+
+    <!-- SUMMARY -->
+
+    <div class="transaction-summary">
+      <div class="summary-card">
+        <span>Total Deposits</span>
+
+        <h2>₹{{ total_deposit }}</h2>
+      </div>
+
+      <div class="summary-card">
+        <span>Total Withdrawals</span>
+
+        <h2>₹{{ total_withdraw }}</h2>
+      </div>
+
+      <div class="summary-card">
+        <span>Total Transfers</span>
+
+        <h2>₹{{ total_transfer }}</h2>
+      </div>
+    </div>
+
+    <div class="transaction-table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>Type</th>
+
+            <th>Amount</th>
+
+            <th>Recipient</th>
+
+            <th>Reference</th>
+
+            <th>Date</th>
+
+            <th>Action</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          {% for item in data %}
+
+          <tr>
+
+            <td>
+              <span
+                class="transaction-type
+                {% if item.type == 'Deposit' %}
+                  type-deposit
+                {% elif item.type == 'Withdraw' %}
+                  type-withdraw
+                {% else %}
+                  type-transfer
+                {% endif %}"
+              >
+
+                {% if item.type == 'Deposit' %}
+
+                  <i class="fa-solid fa-arrow-down"></i>
+
+                {% elif item.type == 'Withdraw' %}
+
+                  <i class="fa-solid fa-arrow-up"></i>
+
+                {% else %}
+
+                  <i class="fa-solid fa-arrow-right-arrow-left"></i>
+
+                {% endif %}
+
+                {{ item.type }}
+
+              </span>
+            </td>
+
+            <td class="transaction-amount">
+
+              {% if item.type == 'Deposit' %}
+                +
+              {% else %}
+                -
+              {% endif %}
+
+              ₹{{ item.amount }}
+
+            </td>
+
+            <td>
+              {% if item.recipient %}
+                {{ item.recipient }}
+              {% else %}
+                —
+              {% endif %}
+            </td>
+
+            <td>
+              {% if item.reference %}
+                {{ item.reference }}
+              {% else %}
+                —
+              {% endif %}
+            </td>
+
+            <td>
+              {{ item.date|date:"d M Y, h:i A" }}
+            </td>
+
+            <td>
+              <a href="{% url 'receipt' item.id %}" class="receipt-btn">
+                <i class="fa-solid fa-receipt"></i>
+                View Receipt
+              </a>
+            </td>
+
+          </tr>
+
+          {% empty %}
+
+          <tr>
+            <td colspan="6" class="no-transactions">
+
+              <i class="fa-solid fa-receipt"></i>
+
+              <p>No transactions found.</p>
+
+            </td>
+          </tr>
+
+          {% endfor %}
+
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <footer class="simple-footer">
+    SecureBank © 2026 | Smart Banking For You
+  </footer>
+</div>
+
+{% endblock %}

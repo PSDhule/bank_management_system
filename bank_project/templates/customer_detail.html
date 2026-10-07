@@ -1,0 +1,176 @@
+{% extends 'base.html' %} 
+{% block content %}
+  <div class="customer-detail-page">
+    <!-- NAVBAR --> 
+     <nav class="customers-navbar">
+      <div class="customers-logo">
+        <i class="fa-solid fa-building-columns"></i> <span>SecureBank</span>
+      </div> 
+      
+      <div class="customers-nav-links">
+        <a href="{% url 'dashboard' %}">
+          <i class="fa-solid fa-house"></i> 
+          Dashboard
+        </a> 
+        
+        <a href="{% url 'profile' %}">
+          <i class="fa-solid fa-user"></i> 
+          Profile
+        </a> 
+        
+        <a href="{% url 'customers' %}" class="active">
+          <i class="fa-solid fa-users"></i> 
+          Customers
+        </a> 
+        
+        <a href="{% url 'transactions' %}">
+          <i class="fa-solid fa-clock-rotate-left"></i> 
+          Transactions
+        </a> 
+        
+        <a href="{% url 'logout' %}" class="customers-logout">
+          <i class="fa-solid fa-right-from-bracket"></i> 
+          Logout</a>
+      </div>
+    </nav> 
+    
+    <!-- PAGE CONTENT --> 
+    <main class="customer-detail-content">
+      <div class="customer-detail-heading">
+        <div>
+          <p class="customers-label">
+            CUSTOMER PROFILE
+          </p> 
+          
+          <h1>Customer Details</h1> 
+          <p>Complete information about the selected customer.</p>
+        </div> 
+        
+        <a href="{% url 'customers' %}" class="customers-back-btn">
+          <i class="fa-solid fa-arrow-left"></i> 
+          All Customers
+        </a>
+      </div> 
+      
+      <!-- CUSTOMER PROFILE CARD --> 
+       <div class="customer-profile-card">
+        <!-- PROFILE HEADER --> 
+        <div class="customer-profile-header">
+          <div class="customer-large-avatar">
+            <i class="fa-solid fa-user"></i>
+          </div> 
+          
+          <div class="customer-profile-name">
+            <p>SECUREBANK CUSTOMER</p> 
+            <h2>{{ customer.name }}</h2> 
+            <span>
+              <i class="fa-solid fa-circle"></i> 
+              {{ customer.account_status }}
+            </span>
+          </div>
+        </div> 
+        
+        <!-- PERSONAL INFORMATION --> 
+        <div class="customer-info-section">
+          <div class="customer-info-title">
+            <i class="fa-solid fa-user"></i> 
+            <div>
+              <span>PERSONAL INFORMATION</span> 
+              <h3>Customer Information</h3>
+            </div>
+          </div> 
+          
+          <div class="customer-info-grid">
+            <!-- NAME --> 
+            <div class="customer-info-box">
+              <span>Full Name</span> 
+              <strong>{{ customer.name }}</strong>
+            </div> 
+            
+            <!-- EMAIL --> 
+            <div class="customer-info-box">
+              <span>Email Address</span> 
+              <strong>{{ customer.email }}</strong>
+            </div> 
+            
+            <!-- PHONE --> 
+            <div class="customer-info-box">
+              <span>Phone Number</span>
+              <strong>
+                {% if customer.phone %}
+                  {{ customer.phone }}
+                {% else %}
+                  Not Provided
+                {% endif %}
+              </strong>
+            </div> 
+            
+            <!-- ADDRESS --> 
+             <div class="customer-info-box customer-address-box">
+              <span>Address</span>
+              <strong>
+                {% if customer.address %}
+                  {{ customer.address }}
+                {% else %}
+                  Not Provided
+                {% endif %}
+              </strong>
+            </div>
+          </div>
+        </div> 
+        
+        <!-- ACCOUNT INFORMATION --> 
+        <div class="customer-info-section">
+          <div class="customer-info-title">
+            <i class="fa-solid fa-credit-card"></i> 
+            <div>
+              <span>ACCOUNT INFORMATION</span> 
+              <h3>Bank Account Details</h3>
+            </div>
+          </div> 
+          
+          <div class="customer-info-grid">
+            <!-- ACCOUNT NUMBER --> 
+            <div class="customer-info-box">
+              <span>Account Number</span> 
+              <strong class="customer-account-number">{{ customer.account_number }}</strong>
+            </div> 
+            
+            <!-- IFSC --> 
+             <div class="customer-info-box">
+              <span>IFSC Code</span> 
+              <strong>{{ customer.ifsc_code }}</strong>
+            </div> 
+            <!-- ACCOUNT STATUS --> 
+             
+            <div class="customer-info-box">
+              <span>Account Status</span> 
+              <strong class="customer-status-text">{{ customer.account_status }}</strong>
+            </div> 
+            
+            <!-- BALANCE --> 
+             <div class="customer-info-box customer-balance-box">
+              <span>Available Balance</span> <strong>₹{{ customer.balance }}</strong>
+            </div>
+          </div>
+        </div> 
+
+        <!-- QUICK ACTIONS --> 
+        <div class="customer-detail-actions">
+          <a href="{% url 'customers' %}">
+            <i class="fa-solid fa-users"></i> 
+            Back to Customers
+          </a> 
+          
+          <a href="{% url 'dashboard' %}">
+            <i class="fa-solid fa-house"></i> 
+            Dashboard
+          </a>
+        </div>
+      </div>
+    </main> 
+    
+    <!-- FOOTER --> 
+    <footer class="simple-footer">SecureBank © 2026 | Smart Banking For You</footer>
+  </div>
+{% endblock %}

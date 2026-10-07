@@ -1,0 +1,6 @@
+.env
+.env.backup
+replace.txt
+
+__pycache__/
+*.py[cod]

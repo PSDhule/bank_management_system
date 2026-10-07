@@ -1,0 +1,221 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+  <div class="dashboard-page">
+    <!-- NAVBAR -->
+    <nav class="navbar">
+      <!-- NAVBAR TOP -->
+      <div class="navbar-top">
+        <div class="logo">
+          <i class="fa-solid fa-building-columns"></i>
+          SecureBank
+        </div>
+
+        <!-- MOBILE MENU BUTTON -->
+        <button type="button" class="menu-toggle" id="menuToggle" aria-label="Toggle Menu"><i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+
+      <!-- NAVIGATION LINKS -->
+
+      <div class="nav-links" id="navLinks">
+        <a href="{% url 'dashboard' %}" class="active">
+          <i class="fa-solid fa-house"></i>
+          <span>Dashboard</span>
+        </a>
+
+        <a href="{% url 'profile' %}">
+          <i class="fa-solid fa-user"></i>
+          <span>Profile</span>
+        </a>
+
+        <a href="{% url 'deposit' %}">
+          <i class="fa-solid fa-wallet"></i> 
+          <span>Deposit</span></a> 
+        
+        <a href="{% url 'withdraw' %}">
+          <i class="fa-solid fa-money-bill-transfer"></i> 
+          <span>Withdraw</span>
+        </a> 
+        
+        <a href="{% url 'transfer' %}">
+          <i class="fa-solid fa-arrow-right-arrow-left"></i> 
+          <span>Transfer</span>
+        </a> 
+        
+        <a href="{% url 'transactions' %}">
+          <i class="fa-solid fa-clock-rotate-left"></i> 
+          <span>Transactions</span>
+        </a> 
+        
+        <a href="{% url 'logout' %}" class="logout">
+          <i class="fa-solid fa-right-from-bracket"></i> 
+          <span>Logout</span>
+        </a>
+      </div>
+    </nav> 
+    
+    <!-- WELCOME --> 
+     
+    <section class="dashboard-welcome">
+      <div>
+        <p class="small-label">
+          SECUREBANK DASHBOARD
+        </p> 
+        <h1>
+          Welcome, {{ user }}
+        </h1> 
+        <p>Manage your account easily with quick actions below.</p>
+      </div>
+    </section> 
+    
+    <!-- MESSAGES --> 
+      {% if messages %}
+        <div class="messages-container">
+          {% for message in messages %}
+            <p class="dashboard-message">
+              <i class="fa-solid fa-circle-check"></i> 
+                {{ message }}
+            </p>
+          {% endfor %}
+        </div>
+      {% endif %} 
+    
+    <!-- DASHBOARD CONTENT --> 
+    <section class="dashboard-content">
+      <!-- ACCOUNT CARD --> 
+        <div class="account-card">
+          <div class="account-card-header">
+            <div class="account-icon">
+              <i class="fa-solid fa-user"></i>
+            </div> 
+            
+            <div>
+              <span>
+                ACCOUNT DETAILS
+              </span> 
+              <h2>
+                Your Account
+              </h2>
+            </div>
+          </div> 
+          
+          <div class="account-info">
+          <div>
+            <span>
+              Name
+            </span> 
+            <strong>
+              {{ user }}
+            </strong>
+          </div> 
+          
+          <div>
+            <span>
+              Account Number
+            </span> 
+            <strong class="account-number">
+              {{ account_number }}
+            </strong>
+          </div>
+        </div> 
+        
+        <div class="balance-box">
+          <span>
+            Available Balance
+          </span> 
+          <h2>
+            ₹{{ balance }}
+          </h2>
+        </div>
+      </div> 
+      
+      <!-- QUICK ACTIONS --> 
+      <section class="quick-actions">
+
+    <h2>Quick Actions</h2>
+
+    <div class="action-grid">
+
+        <!-- DEPOSIT -->
+        <a href="{% url 'deposit' %}" class="action-card deposit-action">
+            <i class="fa-solid fa-wallet"></i>
+
+            <div>
+                <h3>Deposit Money</h3>
+                <p>Add money to your account</p>
+            </div>
+
+            <i class="fa-solid fa-arrow-right action-arrow"></i>
+        </a>
+
+
+        <!-- WITHDRAW -->
+        <a href="{% url 'withdraw' %}" class="action-card withdraw-action">
+            <i class="fa-solid fa-money-bill-transfer"></i>
+
+            <div>
+                <h3>Withdraw Money</h3>
+                <p>Withdraw funds from account</p>
+            </div>
+
+            <i class="fa-solid fa-arrow-right action-arrow"></i>
+        </a>
+
+
+        <!-- TRANSFER -->
+        <a href="{% url 'transfer' %}" class="action-card transaction-action">
+            <i class="fa-solid fa-arrow-right-arrow-left"></i>
+
+            <div>
+                <h3>Transfer Money</h3>
+                <p>Send money to another customer</p>
+            </div>
+
+            <i class="fa-solid fa-arrow-right action-arrow"></i>
+        </a>
+
+
+        <!-- ALL CUSTOMERS -->
+        <a href="{% url 'customers' %}" class="action-card customer-action">
+
+            <i class="fa-solid fa-users"></i>
+
+            <div>
+                <h3>All Customers</h3>
+                <p>View registered customers</p>
+            </div>
+
+            <i class="fa-solid fa-arrow-right action-arrow"></i>
+
+        </a>
+
+
+        <!-- TRANSACTIONS -->
+        <a href="{% url 'transactions' %}" class="action-card transaction-action">
+
+            <i class="fa-solid fa-clock-rotate-left"></i>
+
+            <div>
+                <h3>Transactions</h3>
+                <p>View transaction history</p>
+            </div>
+
+            <i class="fa-solid fa-arrow-right action-arrow"></i>
+
+        </a>
+
+    </div>
+
+</section>
+    
+    <!-- FOOTER --> 
+      <footer class="simple-footer">
+        SecureBank © 2026 | Smart Banking For You
+      </footer>
+  </div> 
+  <!-- MOBILE NAVBAR JS --> 
+  
+  <script src="{% static 'js/style.js' %}"></script>
+{% endblock %}

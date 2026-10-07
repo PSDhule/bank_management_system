@@ -1,0 +1,333 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="dashboard-page profile-page">
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+
+        <div class="logo">
+            <i class="fa-solid fa-building-columns"></i>
+            SecureBank
+        </div>
+
+        <div class="nav-links">
+
+            <a href="{% url 'dashboard' %}">
+                <i class="fa-solid fa-house"></i>
+                Dashboard
+            </a>
+
+            <a href="{% url 'profile' %}" class="active">
+                <i class="fa-solid fa-user"></i>
+                Profile
+            </a>
+
+            <a href="{% url 'deposit' %}">
+                <i class="fa-solid fa-wallet"></i>
+                Deposit
+            </a>
+
+            <a href="{% url 'withdraw' %}">
+                <i class="fa-solid fa-money-bill-transfer"></i>
+                Withdraw
+            </a>
+
+            <a href="{% url 'transfer' %}">
+                <i class="fa-solid fa-arrow-right-arrow-left"></i>
+                Transfer
+            </a>
+
+            <a href="{% url 'transactions' %}">
+                <i class="fa-solid fa-clock-rotate-left"></i>
+                Transactions
+            </a>
+
+            <a href="{% url 'logout' %}" class="logout">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                Logout
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- PROFILE CONTENT -->
+    <main class="profile-page-content">
+
+        <div class="profile-title">
+
+            <p class="small-label">
+                SECUREBANK
+            </p>
+
+            <h1>
+                My Profile
+            </h1>
+
+            <p>
+                View your personal and account information.
+            </p>
+
+        </div>
+
+
+        <div class="profile-card">
+
+
+            <!-- PROFILE HEADER -->
+            <div class="profile-header">
+
+                <div class="profile-avatar">
+
+                    <i class="fa-solid fa-user"></i>
+
+                </div>
+
+                <div>
+
+                    <h2>
+                        {{ user.name }}
+                    </h2>
+
+                    <p>
+                        Customer Account
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- PROFILE DETAILS -->
+            <div class="profile-details">
+
+
+                <!-- FIRST NAME -->
+                <div class="profile-detail-box">
+
+                    <div class="profile-detail-icon">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+
+                    <div class="profile-detail-content">
+
+                        <span>
+                            First Name
+                        </span>
+
+                        <strong>
+                            {{ user.name }}
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ACCOUNT NUMBER -->
+                <div class="profile-detail-box">
+
+                    <div class="profile-detail-icon">
+                        <i class="fa-solid fa-credit-card"></i>
+                    </div>
+
+                    <div class="profile-detail-content">
+
+                        <span>
+                            Account Number
+                        </span>
+
+                        <strong class="account-number">
+                            {{ account_number }}
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <!-- IFSC -->
+                <div class="profile-detail-box">
+
+                    <div class="profile-detail-icon">
+                        <i class="fa-solid fa-building-columns"></i>
+                    </div>
+
+                    <div class="profile-detail-content">
+
+                        <span>
+                            IFSC Code
+                        </span>
+
+                        <strong>
+                            {{ ifsc_code }}
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <!-- EMAIL -->
+                <div class="profile-detail-box">
+
+                    <div class="profile-detail-icon">
+                        <i class="fa-solid fa-envelope"></i>
+                    </div>
+
+                    <div class="profile-detail-content">
+
+                        <span>
+                            Email Address
+                        </span>
+
+                        <strong>
+                            {{ user.email }}
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <!-- PHONE -->
+                <div class="profile-detail-box">
+
+                    <div class="profile-detail-icon">
+                        <i class="fa-solid fa-phone"></i>
+                    </div>
+
+                    <div class="profile-detail-content">
+
+                        <span>
+                            Phone Number
+                        </span>
+
+                        <strong>
+                            {% if user.phone %}
+                                {{ user.phone }}
+                            {% else %}
+                                Not Provided
+                            {% endif %}
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ADDRESS -->
+                <div class="profile-detail-box profile-address-box">
+
+                    <div class="profile-detail-icon">
+                        <i class="fa-solid fa-location-dot"></i>
+                    </div>
+
+                    <div class="profile-detail-content">
+
+                        <span>
+                            Address
+                        </span>
+
+                        <strong>
+                            {% if user.address %}
+                                {{ user.address }}
+                            {% else %}
+                                Not Provided
+                            {% endif %}
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ACCOUNT STATUS -->
+                <div class="profile-detail-box">
+
+                    <div class="profile-detail-icon">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+
+                    <div class="profile-detail-content">
+
+                        <span>
+                            Account Status
+                        </span>
+
+                        <strong class="status-active">
+                            {{ user.account_status }}
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <!-- BALANCE -->
+                <div class="profile-balance-box">
+
+                    <div>
+
+                        <span>
+                            Available Balance
+                        </span>
+
+                        <h2>
+                            ₹{{ user.balance }}
+                        </h2>
+
+                    </div>
+
+                    <i class="fa-solid fa-wallet"></i>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+        <!-- EDIT PROFILE BUTTON -->
+
+        <a href="{% url 'edit_profile' %}"
+           class="edit-profile-btn">
+
+            <i class="fa-solid fa-user-pen"></i>
+
+            Edit Profile
+
+        </a>
+
+        <a href="{% url 'change_password' %}"
+            class="edit-profile-btn">
+
+            <i class="fa-solid fa-lock"></i>
+
+            Change Password
+        </a>
+
+        <a href="{% url 'dashboard' %}"
+           class="profile-back-btn">
+
+            <i class="fa-solid fa-arrow-left"></i>
+
+            Back to Dashboard
+
+        </a>
+
+    </main>
+
+
+    <footer class="simple-footer">
+
+        SecureBank © 2026 | Smart Banking For You
+
+    </footer>
+
+</div>
+
+{% endblock %}

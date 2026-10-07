@@ -1,0 +1,704 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>BM Bank | Smart Banking For You</title>
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+
+<body>
+
+<div class="home-page">
+
+    <!-- ================= NAVBAR ================= -->
+
+    <nav class="home-navbar">
+
+        <div class="home-logo-section">
+
+            <div class="home-bank-logo">
+                <i class="fa-solid fa-building-columns"></i>
+            </div>
+
+            <div class="home-logo-text">
+                <h2>BM Bank</h2>
+                <p>SMART BANKING FOR YOU</p>
+            </div>
+
+        </div>
+
+
+        <div class="home-nav-menu">
+
+            <a href="{% url 'home' %}" class="active">
+                Home
+            </a>
+
+            <a href="#services">
+                Services
+            </a>
+
+            <a href="#features">
+                Features
+            </a>
+
+            <a href="#about">
+                About
+            </a>
+
+            <a href="#contact">
+                Contact
+            </a>
+
+        </div>
+
+
+        <div class="home-auth-buttons">
+
+            <a href="{% url 'login' %}" class="home-login-btn">
+                <i class="fa-solid fa-right-to-bracket"></i>
+                Login
+            </a>
+
+            <a href="{% url 'signup' %}" class="home-signup-btn">
+                <i class="fa-solid fa-user-plus"></i>
+                Sign Up
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- ================= HERO ================= -->
+
+    <section class="home-hero">
+
+        <div class="home-hero-content">
+
+            <span class="home-welcome-badge">
+                Welcome to BM Bank
+            </span>
+
+            <h1>
+                Smart Banking
+                <br>
+                <span>Made Simple.</span>
+            </h1>
+
+            <p class="home-hero-description">
+                Manage your money easily with BM Bank.
+                Deposit, withdraw, transfer money and
+                manage your account from one secure place.
+            </p>
+
+
+            <div class="home-hero-buttons">
+
+                <a href="{% url 'login' %}" class="home-primary-btn">
+                    <i class="fa-solid fa-arrow-right-to-bracket"></i>
+                    Get Started
+                </a>
+
+                <a href="#services" class="home-secondary-btn">
+                    Explore Services
+                    <i class="fa-solid fa-arrow-down"></i>
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- HERO VISUAL -->
+
+        <div class="home-hero-visual">
+
+            <div class="home-bank-building">
+
+                <div class="home-bank-roof">
+                    <span>BM BANK</span>
+                    <div class="roof-line"></div>
+                </div>
+
+
+                <div class="home-bank-columns">
+
+                    <div class="home-column"></div>
+                    <div class="home-column"></div>
+
+                    <div class="home-bank-door">
+                        <i class="fa-solid fa-building-columns"></i>
+                    </div>
+
+                    <div class="home-column"></div>
+                    <div class="home-column"></div>
+
+                </div>
+
+                <div class="home-bank-base"></div>
+
+            </div>
+
+
+            <!-- PHONE -->
+
+            <div class="home-phone">
+
+                <div class="home-phone-screen">
+
+                    <div class="home-phone-top"></div>
+
+                    <div class="home-phone-header">
+
+                        <small>Available Balance</small>
+
+                        <h2>₹25,450</h2>
+
+                    </div>
+
+
+                    <div class="home-phone-transactions">
+
+                        <div class="home-phone-transaction">
+
+                            <div class="home-transaction-icon">
+                                <i class="fa-solid fa-arrow-down"></i>
+                            </div>
+
+                            <span class="home-transaction-name">
+                                Deposit
+                            </span>
+
+                            <strong class="home-green">
+                                + ₹5,000
+                            </strong>
+
+                        </div>
+
+
+                        <div class="home-phone-transaction">
+
+                            <div class="home-transaction-icon">
+                                <i class="fa-solid fa-arrow-up"></i>
+                            </div>
+
+                            <span class="home-transaction-name">
+                                Withdrawal
+                            </span>
+
+                            <strong class="home-red">
+                                - ₹2,000
+                            </strong>
+
+                        </div>
+
+
+                        <div class="home-phone-transaction">
+
+                            <div class="home-transaction-icon">
+                                <i class="fa-solid fa-right-left"></i>
+                            </div>
+
+                            <span class="home-transaction-name">
+                                Transfer
+                            </span>
+
+                            <strong>
+                                ₹1,500
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- CARD -->
+
+            <div class="home-credit-card">
+
+                <div class="home-card-top">
+
+                    <div class="home-chip"></div>
+
+                    <i class="fa-solid fa-wifi"></i>
+
+                </div>
+
+                <div class="home-card-number">
+                    4532  ****  ****  7821
+                </div>
+
+                <div class="home-card-bottom">
+
+                    <span>BM BANK</span>
+                    <span>DEBIT CARD</span>
+
+                </div>
+
+            </div>
+
+
+            <!-- COINS -->
+
+            <div class="home-coins">
+
+                <div class="home-coin coin-one">
+                    ₹
+                </div>
+
+                <div class="home-coin coin-two">
+                    ₹
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= SERVICES ================= -->
+
+    <section class="home-services-section" id="services">
+
+        <div class="home-section-heading">
+
+            <span>OUR SERVICES</span>
+
+            <h2>Banking Services</h2>
+
+        </div>
+
+
+        <div class="home-services-container">
+
+
+            <a href="{% url 'login' %}" class="home-service-card">
+
+                <div class="home-service-icon home-deposit-service">
+                    <i class="fa-solid fa-circle-plus"></i>
+                </div>
+
+                <div>
+                    <h3>Deposit Money</h3>
+
+                    <p>
+                        Add money to your bank account
+                        quickly and securely.
+                    </p>
+                </div>
+
+            </a>
+
+
+            <a href="{% url 'login' %}" class="home-service-card">
+
+                <div class="home-service-icon home-withdraw-service">
+                    <i class="fa-solid fa-money-bill-transfer"></i>
+                </div>
+
+                <div>
+                    <h3>Withdraw Money</h3>
+
+                    <p>
+                        Withdraw your available balance
+                        whenever you need it.
+                    </p>
+                </div>
+
+            </a>
+
+
+            <a href="{% url 'login' %}" class="home-service-card">
+
+                <div class="home-service-icon home-transfer-service">
+                    <i class="fa-solid fa-right-left"></i>
+                </div>
+
+                <div>
+                    <h3>Money Transfer</h3>
+
+                    <p>
+                        Transfer money securely to
+                        another bank customer.
+                    </p>
+                </div>
+
+            </a>
+
+
+            <a href="{% url 'login' %}" class="home-service-card">
+
+                <div class="home-service-icon home-transaction-service">
+                    <i class="fa-solid fa-receipt"></i>
+                </div>
+
+                <div>
+                    <h3>Transactions</h3>
+
+                    <p>
+                        View and manage your complete
+                        transaction history.
+                    </p>
+                </div>
+
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= FEATURES ================= -->
+
+    <section class="home-features-section" id="features">
+
+        <div class="home-section-heading">
+
+            <span>WHY BM BANK</span>
+
+            <h2>Bank With Confidence</h2>
+
+        </div>
+
+
+        <div class="home-features-container">
+
+            <div class="home-feature">
+
+                <div class="home-feature-icon">
+                    <i class="fa-solid fa-shield-halved"></i>
+                </div>
+
+                <div>
+                    <h3>Secure Banking</h3>
+
+                    <p>
+                        Your account information is
+                        protected with secure login.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="home-feature">
+
+                <div class="home-feature-icon">
+                    <i class="fa-solid fa-bolt"></i>
+                </div>
+
+                <div>
+                    <h3>Fast Transactions</h3>
+
+                    <p>
+                        Perform deposits, withdrawals
+                        and transfers quickly.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="home-feature">
+
+                <div class="home-feature-icon">
+                    <i class="fa-solid fa-chart-line"></i>
+                </div>
+
+                <div>
+                    <h3>Track Your Money</h3>
+
+                    <p>
+                        Easily check your balance and
+                        transaction history.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="home-feature">
+
+                <div class="home-feature-icon">
+                    <i class="fa-solid fa-headset"></i>
+                </div>
+
+                <div>
+                    <h3>Easy Management</h3>
+
+                    <p>
+                        Manage your banking activities
+                        from one dashboard.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= ABOUT ================= -->
+
+    <section class="home-about-section" id="about">
+
+        <div class="home-about-content">
+
+            <div class="home-about-text">
+
+                <span>ABOUT BM BANK</span>
+
+                <h2>
+                    Banking Designed
+                    For Your Everyday Needs
+                </h2>
+
+                <p>
+                    BM Bank is a simple banking management
+                    system designed to make everyday banking
+                    activities easier.
+                </p>
+
+                <p>
+                    Customers can securely manage their
+                    account, deposit money, withdraw money,
+                    transfer funds and view transactions.
+                </p>
+
+
+                <div class="home-about-stats">
+
+                    <div>
+                        <h3>24/7</h3>
+                        <p>Account Access</p>
+                    </div>
+
+                    <div>
+                        <h3>100%</h3>
+                        <p>Easy Management</p>
+                    </div>
+
+                    <div>
+                        <h3>Secure</h3>
+                        <p>Transactions</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="home-about-card">
+
+                <i class="fa-solid fa-building-columns"></i>
+
+                <h3>BM Bank</h3>
+
+                <p>
+                    Smart Banking For You
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= CONTACT ================= -->
+
+    <section class="home-contact-section" id="contact">
+
+        <div class="home-contact-heading">
+
+            <span>GET IN TOUCH</span>
+
+            <h2>Contact BM Bank</h2>
+
+            <p>
+                We are here to make your banking experience simple.
+            </p>
+
+        </div>
+
+
+        <div class="home-contact-container">
+
+            <div class="home-contact-box">
+
+                <div class="home-contact-icon">
+                    <i class="fa-solid fa-envelope"></i>
+                </div>
+
+                <h3>Email</h3>
+
+                <p>
+                    support@bmbank.com
+                </p>
+
+            </div>
+
+
+            <div class="home-contact-box">
+
+                <div class="home-contact-icon">
+                    <i class="fa-solid fa-phone"></i>
+                </div>
+
+                <h3>Phone</h3>
+
+                <p>
+                    +91 98765 43210
+                </p>
+
+            </div>
+
+
+            <div class="home-contact-box">
+
+                <div class="home-contact-icon">
+                    <i class="fa-solid fa-location-dot"></i>
+                </div>
+
+                <h3>Location</h3>
+
+                <p>
+                    Maharashtra, India
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer class="home-footer">
+
+        <div class="home-footer-container">
+
+            <div class="home-footer-brand">
+
+                <div class="home-footer-logo">
+
+                    <i class="fa-solid fa-building-columns"></i>
+
+                    <h2>BM Bank</h2>
+
+                </div>
+
+                <p>
+                    Smart Banking For You.
+                </p>
+
+
+                <div class="home-social-icons">
+
+                    <a href="#">
+                        <i class="fa-brands fa-facebook-f"></i>
+                    </a>
+
+                    <a href="#">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+
+                    <a href="#">
+                        <i class="fa-brands fa-linkedin-in"></i>
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <div class="home-footer-column">
+
+                <h3>Quick Links</h3>
+
+                <a href="{% url 'home' %}">
+                    Home
+                </a>
+
+                <a href="#about">
+                    About
+                </a>
+
+                <a href="#services">
+                    Services
+                </a>
+
+                <a href="#contact">
+                    Contact
+                </a>
+
+            </div>
+
+
+            <div class="home-footer-column">
+
+                <h3>Account</h3>
+
+                <a href="{% url 'login' %}">
+                    Login
+                </a>
+
+                <a href="{% url 'signup' %}">
+                    Create Account
+                </a>
+
+            </div>
+
+
+            <div class="home-footer-column contact-footer">
+
+                <h3>Contact</h3>
+
+                <p>
+                    <i class="fa-solid fa-envelope"></i>
+                    support@bmbank.com
+                </p>
+
+                <p>
+                    <i class="fa-solid fa-phone"></i>
+                    +91 98765 43210
+                </p>
+
+                <p>
+                    <i class="fa-solid fa-location-dot"></i>
+                    Maharashtra, India
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="home-footer-bottom">
+
+            © 2026 BM Bank. All Rights Reserved.
+
+        </div>
+
+    </footer>
+
+</div>
+
+</body>
+</html>

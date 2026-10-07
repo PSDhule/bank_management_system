@@ -1,0 +1,406 @@
+{% extends 'base.html' %} 
+{% load static %}
+
+{% block content %}
+
+
+<div class="admin-page">
+  <nav class="admin-navbar">
+    <div class="operation-logo">
+      <i class="fa-solid fa-building-columns"></i>
+
+      SecureBank
+
+      <span class="admin-badge"> ADMIN </span>
+    </div>
+
+    <div class="operation-links">
+
+        <a href="{% url 'admin_dashboard' %}"    class="active">
+            <i class="fa-solid fa-house"></i>
+            Dashboard
+        </a>
+
+        <a href="{% url 'admin_customers' %}">
+          <i class="fa-solid fa-users"></i>
+          Customers
+        </a>
+
+        <a href="{% url 'admin_accounts' %}">
+          <i class="fa-solid fa-credit-card"></i>
+          Accounts
+        </a>
+
+        <a href="{% url 'admin_transactions' %}">
+          <i class="fa-solid fa-clock-rotate-left"></i>
+          Transactions
+        </a>
+
+        <a href="{% url 'logout' %}">
+          <i class="fa-solid fa-right-from-bracket"></i>
+          Logout
+        </a>
+
+      </div>
+  </nav>
+
+  <section class="admin-content">
+    <p class="small-label">SECUREBANK ADMIN PANEL</p>
+
+    <h1>Admin Dashboard</h1>
+
+    <p>Monitor customers, accounts and banking activity.</p>
+
+    <div class="admin-stat-grid">
+      <div class="admin-stat-card">
+        <i class="fa-solid fa-users"></i>
+
+        <span> Customers </span>
+
+        <h2>{{ customers }}</h2>
+      </div>
+
+      <div class="admin-stat-card">
+        <i class="fa-solid fa-user-check"></i>
+
+        <span> Accounts </span>
+
+        <h2>{{ total_accounts }}</h2>
+      </div>
+
+      <div class="admin-stat-card">
+        <i class="fa-solid fa-receipt"></i>
+
+        <span> Transactions </span>
+
+        <h2>{{ total_transactions }}</h2>
+      </div>
+
+      <div class="admin-stat-card">
+        <i class="fa-solid fa-arrow-down"></i>
+
+        <span> Total Deposits </span>
+
+        <h2>₹{{ total_deposit }}</h2>
+      </div>
+
+      <div class="admin-stat-card">
+        <i class="fa-solid fa-arrow-up"></i>
+
+        <span> Total Withdrawals </span>
+
+        <h2>₹{{ total_withdraw }}</h2>
+      </div>
+
+      <div class="admin-stat-card">
+        <i class="fa-solid fa-arrow-right-arrow-left"></i>
+
+        <span> Transfers </span>
+
+        <h2>{{ total_transfer }}</h2>
+      </div>
+
+      <div class="admin-stat-card">
+        <i class="fa-solid fa-wallet"></i>
+
+        <span> Total Bank Balance </span>
+
+        <h2>₹{{ total_bank_balance }}</h2>
+      </div>
+    </div>
+
+  <div class="transaction-statistics">
+    <div class="section-header">
+        <div>
+            <p class="small-label">MONEY FLOW</p>
+            <h2>Monthly Transaction Amount</h2>
+        </div>
+    </div>
+
+    <div class="chart-container">
+        <canvas id="transactionAmountChart"></canvas>
+    </div>
+  </div>
+
+  <div class="recent-transactions">
+
+    <div class="section-header">
+        <div>
+            <p class="small-label">BANKING ACTIVITY</p>
+            <h2>Recent Transactions</h2>
+        </div>
+
+        <a href="{% url 'admin_transactions' %}">
+            View All
+        </a>
+    </div>
+
+    {% if recent_transactions %}
+
+    <div class="transaction-table-wrapper">
+
+        <table class="admin-transaction-table">
+
+            <thead>
+                <tr>
+                    <th>Customer</th>
+                    <th>Type</th>
+                    <th>Amount</th>
+                    <th>Reference</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                {% for transaction in recent_transactions %}
+
+                <tr>
+
+                    <td>
+                        {{ transaction.user.name }}
+                    </td>
+
+                    <td>
+                        {{ transaction.type }}
+                    </td>
+
+                    <td>
+                        ₹{{ transaction.amount }}
+                    </td>
+
+                    <td>
+                        {{ transaction.reference }}
+                    </td>
+
+                    <td>
+                        {{ transaction.date|date:"d M Y, h:i A" }}
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    {% else %}
+
+    <div class="no-transactions">
+        <i class="fa-solid fa-receipt"></i>
+        <p>No transactions available.</p>
+    </div>
+
+    {% endif %}
+
+</div>
+    
+    <div class="admin-quick-links">
+
+      <a href="{% url 'admin_customers' %}">
+        <i class="fa-solid fa-users"></i>
+        Manage Customers
+      </a>
+
+      <a href="{% url 'admin_accounts' %}">
+        <i class="fa-solid fa-credit-card"></i>
+        View Accounts
+      </a>
+
+      <a href="{% url 'admin_transactions' %}">
+        <i class="fa-solid fa-clock-rotate-left"></i>
+        View Transactions
+      </a>
+
+    </div>
+  </section>
+
+  <footer class="simple-footer">SecureBank © 2026 | Admin Panel</footer>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+
+const depositAmountData = [
+    {% for item in monthly_deposits %}
+    {
+        month: "{{ item.month|date:'M Y' }}",
+        total: {{ item.total|default:0 }}
+    },
+    {% endfor %}
+];
+
+
+const withdrawAmountData = [
+    {% for item in monthly_withdrawals %}
+    {
+        month: "{{ item.month|date:'M Y' }}",
+        total: {{ item.total|default:0 }}
+    },
+    {% endfor %}
+];
+
+
+const transferAmountData = [
+    {% for item in monthly_transfers %}
+    {
+        month: "{{ item.month|date:'M Y' }}",
+        total: {{ item.total|default:0 }}
+    },
+    {% endfor %}
+];
+
+
+// Get all months
+const allMonths = new Set();
+
+depositAmountData.forEach(item => {
+    allMonths.add(item.month);
+});
+
+withdrawAmountData.forEach(item => {
+    allMonths.add(item.month);
+});
+
+transferAmountData.forEach(item => {
+    allMonths.add(item.month);
+});
+
+const labels = Array.from(allMonths);
+
+
+// Get amount for each month
+function getAmount(data, month) {
+
+    const item = data.find(
+        transaction => transaction.month === month
+    );
+
+    return item ? item.total : 0;
+}
+
+
+// Deposit amount
+const deposits = labels.map(month => {
+    return getAmount(
+        depositAmountData,
+        month
+    );
+});
+
+
+// Withdraw amount
+const withdrawals = labels.map(month => {
+    return getAmount(
+        withdrawAmountData,
+        month
+    );
+});
+
+
+// Transfer amount
+const transfers = labels.map(month => {
+    return getAmount(
+        transferAmountData,
+        month
+    );
+});
+
+
+// Chart
+const chartElement = document.getElementById(
+    'transactionAmountChart'
+);
+
+if (chartElement) {
+
+    const ctx = chartElement.getContext('2d');
+
+    new Chart(ctx, {
+
+        type: 'bar',
+
+        data: {
+
+            labels: labels,
+
+            datasets: [
+
+                {
+                    label: 'Deposits',
+                    data: deposits,
+                    borderWidth: 1
+                },
+
+                {
+                    label: 'Withdrawals',
+                    data: withdrawals,
+                    borderWidth: 1
+                },
+
+                {
+                    label: 'Transfers',
+                    data: transfers,
+                    borderWidth: 1
+                }
+
+            ]
+
+        },
+
+        options: {
+
+            responsive: true,
+
+            maintainAspectRatio: false,
+
+            scales: {
+
+                y: {
+
+                    beginAtZero: true,
+
+                    ticks: {
+
+                        callback: function(value) {
+                            return '₹' + value;
+                        }
+
+                    }
+
+                }
+
+            },
+
+            plugins: {
+
+                tooltip: {
+
+                    callbacks: {
+
+                        label: function(context) {
+
+                            return context.dataset.label
+                                + ': ₹'
+                                + context.raw;
+
+                        }
+
+                    }
+
+                }
+
+            }
+
+        }
+
+    });
+
+}
+
+</script>
